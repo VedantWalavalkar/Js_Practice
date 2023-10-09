@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="form1">
+    <form>
+        Name: <input type="text" class="ele" id="name" value="" onchange="validateName()" required><br>
+        Email: <input type="text" class="ele" id="email" value="" onchange="validateEmail()" required><br>
+        Password: <input type="text" class="ele" id="password" value="" onchange="validate()"><br>
+        <span id="validationStatement" style="display: none;justify-content: center; color: red;">Invalid password</span><br>
+        Phone no.: <input type="text" class="ele" id="phone-number" value="" onchange="validatePhone()"><br>
+
+        <button type="button" id="SubmitBtn"disabled>Submit</button>
+    </form>
+    </div>
+    <!-- <div class="form2">
+        <form>
+            <input type="text" id="name2" value="" placeholder="Name" required><br>
+            <input type="text" id="email2" value="" placeholder="Email"><br>
+            <input type="text" id="password2" value="" placeholder="Password"><br>
+            <input type="text" id="phone-number2" value="" placeholder="Phone Number"><br>
+            <span id="validationStatement2" style="display: none;">valid password</span><br>
+
+
+        </form>
+    </div> -->
+    <script>
+        var nameFilled = false;
+        var emailValid = false;
+        var passwordValid = false;
+        var phnValid = false;
+    
+        document.getElementsByClassName("form1").style.justifyContent = "center";
+    
+        function validateName(){
+            let str = document.getElementById("name").value;
+            if(str != "") nameFilled = true;
+            else{
+                nameFilled = false;
+                console.log("working")
+                document.getElementById("SubmitBtn").disabled = true;
+            } 
+        }
+        function validateEmail(){
+            var emailVal = document.getElementById("email").value;
+            if(!(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(emailVal))){
+                alert("Invalid Email");
+                document.getElementById("SubmitBtn").disabled = true;  
+                return true;
+            }
+            emailValid = true;
+            console.log(emailValid);
+
+            if(phnValid&&passwordValid&&nameFilled){
+                document.getElementById("SubmitBtn").disabled = false;
+            }
+        }
+        function validate(){
+            var val = document.getElementById("password").value;
+            const inv = document.getElementById("validationStatement");
+            console.log(val);
+            if(/[-’/`~!#*$@_%+=.,^&(){}[\]|;:”<>?\\]/g.test(val) && /[a-z]/g.test(val) && /[A-Z]/g.test(val) && /[0-9]/g.test(val)){
+                // document.getElementById("validationStatement").style.display = "none";
+                inv.style.display="none";
+                document.getElementById("password").style.border = "1px solid black";
+                passwordValid = true;
+                console.log(passwordValid);
+                if(emailValid && phnValid && nameFilled) document.getElementById("SubmitBtn").disabled = false;
+                // return false;
+            }
+            else {
+                document.getElementById("password").style.border = "2px solid red";
+                inv.style.display = "flex";
+                inv.style.color="red";
+                inv.style.justifyContent="center";
+                document.getElementById("SubmitBtn").disabled = true;  
+                console.log("notWorkingEmail");
+                // return true;
+            }
+        }
+
+        function validatePhone(){
+            var num = document.getElementById("phone-number").value;
+            var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+            if(!re.test(num)){
+                alert("Please Enter Valid Number");
+                document.getElementById("SubmitBtn").disabled = true;
+                return false;
+            }
+            phnValid = true;
+            console.log(phnValid);
+            if(emailValid && passwordValid && nameFilled) document.getElementById("SubmitBtn").disabled = false; 
+            return true;
+        } 
+    </script>
+</body>
+</html>

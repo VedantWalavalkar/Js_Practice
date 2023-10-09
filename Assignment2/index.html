@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <style>
+    *{
+    margin: 0;
+    padding: 0;
+    /* border-bottom: 1px solid red;
+    width: 100%;
+    transform: rotate(45deg);
+    transform-origin: top left; */
+}
+#outerContainer{
+    width: 500px;
+    height: 500px;
+    border: 2px solid black;
+}
+#container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    background-color: black;
+}
+   </style>
+
+   <script>
+
+
+
+
+document.addEventListener("keypress", function() {
+    let winHeight = screen.availHeight;
+let winWidth = screen.availWidth;
+
+document.addEventListener("keypress",move());
+
+
+console.log(window)
+
+//console.log(document.addEventListener("keypress",move()))
+
+// function diagShift(){
+//     let ele1 = document.getElementById("container");
+//     ele1.style.background = "red";
+//     console.log(winHeight);
+//     console.log(winWidth);
+//     ele1.style.top="598px";
+//     ele1.style.left="1199px";
+// }
+
+function move(){
+    let outerbox = window.document.getElementById("outerContainer");
+    let innerbox = window.document.getElementById("container");
+    let innerboxt =window.getComputedStyle(container).top.toString().split("px")[0]
+    let innerboxl =window.getComputedStyle(container).left.toString().split("px")[0]
+    // console.log(innerbox1);
+
+
+   // innerbox = innerbox.split()
+   // console.log(innerbox)
+    innerbox.style.backgroundColor="red";
+    console.log(innerbox.style.top)
+    if(innerboxt < 400 && innerboxl < 400){
+
+        console.log("qqdqwq")
+
+        let topVal = parseInt(innerboxt) + 100;
+        let botVal = parseInt(innerboxl) + 100;
+
+        console.log(topVal, botVal);
+
+        // innerbox.style.top = innerbox.style.top + '100px;
+        innerbox.style.top = `${topVal}px`;
+        // innerbox.style.left = innerbox.style.left + '100px';
+        innerbox.style.left = `${botVal}px`;
+
+
+        // topVal = topVal+100;
+        // botVal = botVal + 100;
+    }
+    else{
+        innerbox.style.top = "0px";
+        innerbox.style.left = "0px";
+    }
+    }
+    // Code to be executed when the DOM is ready
+});
+
+// window.addEventListener('load', function() {
+
+//     let innerbox = window.document.getElementById("container");
+
+//     console.log(innerbox.style.top)
+   
+// })
+
+
+
+   </script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="outerContainer">
+      <div id="container"></div>
+    </div>
+
+</body>
+</html>
